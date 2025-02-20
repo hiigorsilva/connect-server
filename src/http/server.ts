@@ -11,13 +11,16 @@ import {
 import { env } from '../env'
 import { subscribeToEventRoute } from '../routes/subscription-to-event'
 
+// INSTANCE SERVER
 const app = fastify({ logger: true }).withTypeProvider<ZodTypeProvider>()
 
+// VALIDATION
 app.setValidatorCompiler(validatorCompiler)
 app.setSerializerCompiler(serializerCompiler)
 
 app.register(fastifyCors)
 
+// DOCUMENTATION CONFIG
 app.register(fastifySwagger, {
   openapi: {
     info: {
@@ -28,12 +31,15 @@ app.register(fastifySwagger, {
   transform: jsonSchemaTransform,
 })
 
+// DOCUMENTATION ROUTE
 app.register(fastifySwaggerUi, {
   routePrefix: '/docs',
 })
 
+// ROUTES
 app.register(subscribeToEventRoute)
 
+// START SERVER
 app.listen({ port: env.PORT }).then(() => {
   console.log(`HTTP server running on port ${env.PORT}`)
 })
