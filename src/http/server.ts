@@ -9,10 +9,11 @@ import {
   validatorCompiler,
 } from 'fastify-type-provider-zod'
 import { env } from '../env'
+import { accessInviteLinkRoute } from '../routes/access-invite-link'
 import { subscribeToEventRoute } from '../routes/subscription-to-event'
 
 // INSTANCE SERVER
-const app = fastify({ logger: true }).withTypeProvider<ZodTypeProvider>()
+const app = fastify().withTypeProvider<ZodTypeProvider>()
 
 // VALIDATION
 app.setValidatorCompiler(validatorCompiler)
@@ -38,6 +39,7 @@ app.register(fastifySwaggerUi, {
 
 // ROUTES
 app.register(subscribeToEventRoute)
+app.register(accessInviteLinkRoute)
 
 // START SERVER
 app.listen({ port: env.PORT }).then(() => {
