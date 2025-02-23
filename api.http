@@ -2,10 +2,23 @@ POST http://localhost:3333/subscriptions
 Content-Type: application/json
 
 {
-  "name": "Higor Silva",
-  "email": "higor@gmail.com"
+  "name": "Usuário 4 Indicado",
+  "email": "indicado4@gmail.com",
+  "referrer": "9535697c-0f33-42f6-9efc-c4194660db10"
 }
 
 ###
 
-GET http://localhost:3333/invites/higor123
+GET http://localhost:3333/invites/9535697c-0f33-42f6-9efc-c4194660db10
+
+### 
+GET http://localhost:3333/subscribers/9535697c-0f33-42f6-9efc-c4194660db10/ranking/clicks
+
+### 
+GET http://localhost:3333/subscribers/9535697c-0f33-42f6-9efc-c4194660db10/ranking/count
+
+### 
+GET http://localhost:3333/subscribers/9535697c-0f33-42f6-9efc-c4194660db10/ranking/position
+
+### 
+GET http://localhost:3333/ranking
