@@ -1,6 +1,6 @@
 import { inArray } from 'drizzle-orm'
 import { db } from '../database/drizzle/client'
-import { subscriptions } from '../database/drizzle/schema/subscriptions'
+import { schema } from '../database/drizzle/schema'
 import { redis } from '../database/redis/client'
 
 export const getRanking = async () => {
@@ -13,8 +13,8 @@ export const getRanking = async () => {
 
   const subscribers = await db
     .select()
-    .from(subscriptions)
-    .where(inArray(subscriptions.id, Object.keys(subscriberIdAndScore)))
+    .from(schema.subscriptions)
+    .where(inArray(schema.subscriptions.id, Object.keys(subscriberIdAndScore)))
 
   const rankingWithScore = subscribers
     .map(subscriber => {

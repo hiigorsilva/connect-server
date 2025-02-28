@@ -8,9 +8,9 @@ export const accessInviteLinkRoute: FastifyPluginAsyncZod = async app => {
     '/invites/:subscriberId',
     {
       schema: {
-        summary: 'Access invite link and redirects user to event',
+        summary: 'Access invite link',
+        operationId: 'accessInviteLink',
         tags: ['referral'],
-        description: 'Subscribe someone to event',
         params: z.object({
           subscriberId: z.string(),
         }),
@@ -24,7 +24,7 @@ export const accessInviteLinkRoute: FastifyPluginAsyncZod = async app => {
       await accessInviteLink({ subscriberId })
 
       const redirectUrl = new URL(env.WEB_URL)
-      redirectUrl.searchParams.set('referral', subscriberId)
+      redirectUrl.searchParams.set('referrer', subscriberId)
 
       return reply.redirect(redirectUrl.toString(), 302)
       // 302 significa Redirect Temporary, e não vai cachear os dados. Então, todos os redirects vão ser contabilizados. Isso não aconteceria com o 301 que chacheia os dados

@@ -8,9 +8,9 @@ export const getSubscriberInvitesCountRoute: FastifyPluginAsyncZod =
       '/subscribers/:subscriberId/ranking/count',
       {
         schema: {
-          summary: 'Get subscriber invites count',
+          summary: 'Get subscriber ranking invites count',
+          operationId: 'getSubscriberInviteCount',
           tags: ['referral'],
-          description: 'Subscribe someone to event',
           params: z.object({
             subscriberId: z.string(),
           }),
